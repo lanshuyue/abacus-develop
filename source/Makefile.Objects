@@ -19,6 +19,7 @@ VPATH=./src_global:\
 ./source_cell/module_neighlist:\
 ./source_cell/module_symmetry:\
 ./source_cell:\
+./source_cell/kernels:\
 ./source_base:\
 ./source_base/kernels:\
 ./source_base/module_external:\
@@ -287,6 +288,10 @@ OBJS_ELECSTAT=elecstate.o\
     pcc_2d.o\
     pot_pcc.o\
     pot_sccs.o\
+    potential_sccs.o\
+    sccs_fixed_src.o\
+    sccs_output.o\
+    sccs_collect.o\
     sccs_pcc_0d.o\
     sccs_pcc_2d.o\
     elecstate_op.o\
@@ -454,6 +459,7 @@ OBJS_DFPT=dfpt_hamilt_shift.o\
     dfpt_q0_pos.o\
     dfpt_rho.o\
     dfpt_stern.o\
+    dfpt_write_dyn.o\
     dfpt_xc_analytic.o
 
 OBJS_HAMILT_LCAO=hamilt_lcao.o\
@@ -650,6 +656,7 @@ OBJS_SURCHEM=surchem.o\
 
 OBJS_SCCS=sccs_cavity.o\
     sccs_cav_deriv.o\
+    sccs_diag.o\
     sccs_functional.o\
     sccs_lowpass.o\
     sccs_parameters.o\
@@ -888,6 +895,10 @@ OBJS_LCAO=evolve_elec.o\
       center2orb_orb22.o\
 
 OBJS_MODULE_RI=conv_coulomb_pot_k.o\
+      smooth_cut_coulomb.o\
+      invmat_ri.o\
+      lri_cv.o\
+      lri_cv_tools.o\
       exx_abfs_jle.o\
       module_restart/restart_exx_csr.o\
       exx_abfs_io.o\

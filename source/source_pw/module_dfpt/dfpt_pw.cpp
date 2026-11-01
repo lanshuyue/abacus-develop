@@ -15,7 +15,7 @@
 #include "source_base/timer.h"
 #include "source_base/tool_title.h"
 #include "source_cell/qlist.h"
-#include "source_pw/module_pwdft/stru_fac.h"
+#include "source_cell/stru_fac.h"
 
 #include <algorithm>
 #include <cmath>
@@ -64,6 +64,16 @@ bool DFPT_PW::get_u_active() const
 int DFPT_PW::get_nq() const
 {
     return pimpl_->qlist_.get_nq();
+}
+
+const DFPT_PW_Data& DFPT_PW::get_data() const
+{
+    return pimpl_->data_;
+}
+
+int DFPT_PW::get_myrank() const
+{
+    return pimpl_->myrank_;
 }
 
 ModuleBase::Vector3<double> DFPT_PW::get_qvec(int q_idx) const
