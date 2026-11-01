@@ -40,7 +40,7 @@ def main():
             raise AssertionError("Valid onsite mesh failed:\n" + valid.stdout[-3000:])
 
         invalid = run_case(binary, reference, 6.2, root)
-        expected = "onsite_radius must lie inside the orbital radial grid: Fe_gga_6au_100Ry_4s2p2d1f.orb"
+        expected = "onsite_radius must lie inside the orbital radial grid."
         if invalid.returncode == 0 or expected not in invalid.stdout:
             raise AssertionError("Invalid onsite mesh was not rejected:\n" + invalid.stdout[-3000:])
 

@@ -14,7 +14,6 @@
 #include "source_base/kernels/math_kernel_op.h"
 #include "source_base/tool_quit.h"
 #include "source_base/timer.h"
-#include "source_io/module_parameter/parameter.h"
 
 /**
  * ===============================================================================================
@@ -241,8 +240,7 @@ void projectors::OnsiteProjector<T, Device>::init_proj(const std::string& orbita
         {
             if (!(onsite_r[idx] > 0.0) || onsite_r[idx] >= (nr_ - 1) * dr_)
             {
-                ModuleBase::WARNING_QUIT("OnsiteProjector",
-                                         "onsite_radius must lie inside the orbital radial grid: " + orb_files[it]);
+                ModuleBase::WARNING_QUIT("OnsiteProjector", "onsite_radius must lie inside the orbital radial grid.");
             }
             int l = lproj[idx];
             int izeta = iproj[idx];
