@@ -90,7 +90,15 @@ TEST_F(InputTest, PwOnsiteRequiresDoublePrecision)
     inp.esolver_type = "tddft";
     testing::internal::CaptureStdout();
     EXPECT_EXIT(check_item(item->second, param), ::testing::ExitedWithCode(1), "");
-    EXPECT_THAT(testing::internal::GetCapturedStdout(), testing::HasSubstr("PW DeltaSpin requires precision = double"));
+    EXPECT_THAT(testing::internal::GetCapturedStdout(),
+                testing::HasSubstr("PW RT-TDDFT does not support spin constraints at any precision"));
+
+    inp.sc_mag_switch = false;
+    inp.dft_plus_u = 1;
+    testing::internal::CaptureStdout();
+    EXPECT_EXIT(check_item(item->second, param), ::testing::ExitedWithCode(1), "");
+    EXPECT_THAT(testing::internal::GetCapturedStdout(),
+                testing::HasSubstr("PW RT-TDDFT does not support DFT+U at any precision"));
 
     inp.precision = "double";
     inp.dft_plus_u = 1;

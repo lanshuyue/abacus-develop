@@ -999,7 +999,8 @@ Available options are:
         item.description = R"(Specifies the precision when performing scf calculation.
 * single: single precision
 * double: double precision
-PW DFT+U and DeltaSpin onsite corrections require double precision.)";
+PW Kohn-Sham DFT+U and DeltaSpin onsite corrections require double precision.
+PW RT-TDDFT does not support DFT+U or spin constraints at any precision.)";
         item.default_value = "double";
         item.set_availability("basis_type==pw");
         read_sync_string(input.precision);
@@ -1009,6 +1010,21 @@ PW DFT+U and DeltaSpin onsite corrections require double precision.)";
                                           && (inp.esolver_type == "ksdft" || inp.esolver_type == "tddft");
             if (pw_onsite_solver && inp.precision == "single")
             {
+                if (inp.esolver_type == "tddft")
+                {
+                    if (inp.dft_plus_u != 0)
+                    {
+                        ModuleBase::WARNING_QUIT(
+                            "ReadInput",
+                            "PW RT-TDDFT does not support DFT+U at any precision; set dft_plus_u=0.");
+                    }
+                    if (inp.sc_mag_switch)
+                    {
+                        ModuleBase::WARNING_QUIT(
+                            "ReadInput",
+                            "PW RT-TDDFT does not support spin constraints at any precision; set sc_mag_switch=false.");
+                    }
+                }
                 if (inp.dft_plus_u != 0)
                 {
                     ModuleBase::WARNING_QUIT(
